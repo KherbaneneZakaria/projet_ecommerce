@@ -1,0 +1,68 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element">
+            <form id="form">
+                <div id="user-info">
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="name" placeholder="Nom">
+                    </div>
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="prenom" placeholder="Prénom">
+                    </div>
+                    <div class="form-field">
+                        <input required class="form-control" type="email" name="email" placeholder="Adresse mail">
+                    </div>
+
+                </div>
+                <div id="shipping-info">
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="address" placeholder="Addresse">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="city" placeholder="Ville">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="code" placeholder="Code Postale">
+                    </div>
+                    
+                   
+
+                </div>
+                <hr>
+                <input id="form-button" class="btn btn-success btn-block"  type="submit" value="continuer">
+            </form>
+            <br>
+            <div class="box-element hidden" id="payment-info">
+                <small>Options de paiement</small>
+
+            </div>
+            
+        </div>
+
+    </div>
+    <div class="col-lg-6">
+        <div class="box-element">
+            <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; retour au panier</a>
+            <hr>
+            <h3>résumé de la commande</h3>
+            <hr>
+            {% for item in articles %}
+            <div class="cart-row">
+                <div style="flex: 2;"> <img class="row-image" src="{{item.article.imageURL}}" alt=""></div>
+                <div style="flex: 2; margin-top: 1cm;"><strong>{{item.article.name}}</strong></div>
+                <div style="flex: 1; margin-top: 1cm;"><strong>{{item.article.prix}}</strong></div>
+                <div style="flex: 1; margin-top: 1cm;"><strong>x{{item.quantite}}</strong></div>
+            {% endfor %}    
+                
+
+            </div>
+            <h5>articles : {{commande.get_cart_items}}</h5>
+            <h5>totale : {{commande.get_cart_total}} DA</h5>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
